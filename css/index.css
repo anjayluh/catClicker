@@ -3,9 +3,19 @@ body {
 }
 
 .env {
-    width: 50%;
+    width: 70%;
     margin: auto;
     font-family: "Lucida Console", Monaco, monospace;
     font-size: 24;
     padding-top: 40px;
+    display: flex;
+    display: flex;
+}
+
+img {
+    width: 50%;
+}
+
+.cat2 {
+    width: 65%;
 }
