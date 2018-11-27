@@ -7,7 +7,7 @@ const allCats = {
         cats: [{
                 clickCount: 0,
                 name: 'Daisy',
-                imgSrc: 'images/cat.jfif',
+                imgSrc: 'images/catf.jfif',
             },
             {
                 clickCount: 0,
@@ -51,11 +51,16 @@ for (const catName of displayNames.children) {
         for (let index = 0; index < allCats.cats.length; index++) {
             if (catName.children[0].innerText === allCats.cats[index].name) {
                 // console.log(allCats.cats[index].name);
+
+                //Add div tag and display the cat details in it
                 let div = document.createElement('div');
                 div.classList.add('image');
-                div.innerHTML = `<span class="count"> Count: ${allCats.cats[index].clickCount}</span><img class="image" src = "${allCats.cats[index].imgSrc}">`
+                div.innerHTML = `Name: ${allCats.cats[index].name}<br/><span class="count">Count: ${allCats.cats[index].clickCount}</span><img class="image" src = "${allCats.cats[index].imgSrc}">`
+                    //add the div content to the display div in html
                 displayImage.innerHTML = div.innerHTML;
+                //Select the image tag to check for click events
                 let currentCat = document.querySelector('img');
+                //Check if image is clicked and update clickCount
                 currentCat.addEventListener('click', function() {
                     allCats.cats[index].clickCount += 1;
                     document.querySelector(".count").innerText = `Count: ${allCats.cats[index].clickCount}`;
