@@ -47,6 +47,10 @@ octopus = {
             this.id += 1
         }
     },
+    incrementCount: function(count) {
+        return count += 1;
+    },
+
     displayClickedCat: function() {
         for (const catName of this.displayNames.children) {
             catName.addEventListener('click', function() {
@@ -59,13 +63,17 @@ octopus = {
                         let div = document.createElement('div');
                         div.classList.add('image');
                         div.innerHTML = `Name: ${data.cats[index].name}<br/><span class="count">Count: ${data.cats[index].clickCount}</span><img class="image" src = "${data.cats[index].imgSrc}">`;
+
                         //add the div content to the display div in html
                         octopus.displayImage.innerHTML = div.innerHTML;
+
                         //Select the image tag to check for click events
                         let currentCat = document.querySelector('img');
+
                         //Check if image is clicked and update clickCount
                         currentCat.addEventListener('click', function() {
-                            data.cats[index].clickCount += 1;
+                            //Increment click counter
+                            data.cats[index].clickCount = octopus.incrementCount(data.cats[index].clickCount);
                             document.querySelector(".count").innerText = `Count: ${data.cats[index].clickCount}`;
                         });
                         // displayImage.appendChild(div);
