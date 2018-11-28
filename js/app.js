@@ -34,18 +34,29 @@ const data = {
     ],
 };
 octopus = {
-    id: 0,
     //Get tags to display cat names and images
     displayNames: document.querySelector('.selector'),
     displayImage: document.querySelector('.display'),
-    displayCatList: function() {
+    adminButton: document.querySelector('.admin-button'),
+    inputForm: document.querySelector('form'),
+    init: function() {
+        this.displayNames.innerHTML = "";
+        id = 0
         for (cat of data.cats) {
-            let div = document.createElement('div');
-            div.classList.add('link');
-            div.innerHTML = `<p>${data.cats[this.id].name}</p>`
-            this.displayNames.appendChild(div);
-            this.id += 1
+            if (id < data.cats.length) {
+                let div = document.createElement('div');
+                div.classList.add('link');
+                div.innerHTML = `<p>${data.cats[id].name}</p>`;
+                this.displayNames.appendChild(div);
+                id++;
+            }
+
         }
+
+        //Hide form on on load
+        this.hide(this.inputForm);
+        //Invoke show form on click
+        this.dispalyAdmin();
     },
     incrementCount: function(count) {
         return count += 1;
@@ -83,9 +94,46 @@ octopus = {
 
             });
         }
-    }
+    },
+    hide: function(element) {
+        element.classList.add('hide');
+    },
+    show: function(element) {
+        element.classList.remove('hide');
+        element.classList.add('show');
+    },
+    //Show form on click of admin button
+    dispalyAdmin: function() {
+        //Listen for click
+        this.adminButton.addEventListener('click', function() {
+            octopus.show(octopus.inputForm)
+            octopus.insertInput();
+        });
+    },
+    insertInput: function() {
+        let submitButton = document.querySelectorAll("input[type=button]")[0],
+            nameValue, srcValue, countValue;
+        submitButton.addEventListener('click', function() {
+            //Save values from the form
+            nameValue = document.getElementById('name').value;
+            srcValue = document.getElementById('src').value;
+            countValue = Number(document.getElementById('count').value);
+            console.log(nameValue);
+            console.log(srcValue);
+            console.log(countValue);
+            data.cats.push({
+                clickCount: countValue,
+                name: nameValue,
+                imgSrc: srcValue
+            });
+            octopus.init();
+            octopus.displayClickedCat();
+
+        });
+    },
 };
+
 //Invoke display names
-octopus.displayCatList();
+octopus.init();
 //invoke display cat
 octopus.displayClickedCat();

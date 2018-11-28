@@ -22,3 +22,11 @@ body {
 .image {
     width: 40%;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
