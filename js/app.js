@@ -102,12 +102,21 @@ octopus = {
         element.classList.remove('hide');
         element.classList.add('show');
     },
+    cancel: function(element) {
+        element.classList.remove('show');
+        element.classList.add('hide');
+    },
     //Show form on click of admin button
     dispalyAdmin: function() {
         //Listen for click
         this.adminButton.addEventListener('click', function() {
             octopus.show(octopus.inputForm)
             octopus.insertInput();
+        });
+        //Hide if cancel is clicked
+        let cancelButton = document.querySelector('.cancel')
+        cancelButton.addEventListener('click', function() {
+            octopus.cancel(octopus.inputForm)
         });
     },
     insertInput: function() {
